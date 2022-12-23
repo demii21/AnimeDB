@@ -5,6 +5,8 @@ import MainContent from './components/MainContent';
 import AnimePage from './components/AnimePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
+
+
 function App() {
 	const host = "http://localhost:5000"
 	const [animeList, SetAnimeList] = useState([]);
@@ -12,7 +14,7 @@ function App() {
 	const [search, SetSearch] = useState("");
 
 	const GetTopAnime = async () => {
-		let data = await fetch(`${host}/topAnime`)
+		let data = await fetch(`${host}/api/anime/topAnime`)
 		let parsedData = await  data.json()
 		
 		SetTopAnime(parsedData.slice(0, 5));
@@ -23,7 +25,7 @@ function App() {
 	}
 	const FetchAnime = async (query) => {
 		try {
-			const data = await fetch(`${host}/search/?q=${query}`).then(res => res.json());
+			const data = await fetch(`${host}/api/anime/search/?q=${query}`).then(res => res.json());
 			SetAnimeList(data)
 		}
 		catch (e) {
@@ -52,6 +54,7 @@ function App() {
 							search={search}
 							SetSearch={SetSearch}
 							animeList={animeList} /></Fragment>} />
+							
 						<Route path="/:id" element={<AnimePage/>} />
 					</Routes>
 				</BrowserRouter>
