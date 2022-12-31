@@ -1,12 +1,9 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 function AnimeCard({anime}) {
 	return (		
 		<article className="anime-card">
-			<a 
-				href={anime.url} 
-				target="_blank" 
-				rel="noreferrer">
+			<Link to={`/${anime.mal_id}`}>
 				<figure>
 					<img 
 						src={anime.images.jpg.image_url} 
@@ -15,7 +12,7 @@ function AnimeCard({anime}) {
 				</figure>
 				<h3>{ anime.title }</h3>
 				<p>{(anime.synopsis)?anime.synopsis.slice(0,75):""}</p>
-			</a>
+				</Link>
 		</article>
 	)
 }

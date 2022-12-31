@@ -12,7 +12,7 @@ function App() {
 	const [animeList, SetAnimeList] = useState([]);
 	const [topAnime, SetTopAnime] = useState([]);
 	const [search, SetSearch] = useState("");
-
+	const [loading, setLoading] = useState(true);
 	const GetTopAnime = async () => {
 		let data = await fetch(`${host}/api/anime/topAnime`)
 		let parsedData = await  data.json()
@@ -36,32 +36,41 @@ function App() {
 	useEffect(() => {
 		try{
 			GetTopAnime();
+			setLoading(false);
 		}
 		catch(err){
 			console.error(err)
 		}
 		
 	}, []);
-
+if(!loading){
 	return (
 		<div className="App">
 			<Header />
 			<div className="content-wrap">
-				<BrowserRouter>
+				
 					<Routes>
-						<Route path="/" element={<Fragment><Sidebar topAnime={topAnime} /><MainContent
+						<Route exact path="/" element={<Fragment><Sidebar topAnime={topAnime} /><MainContent
 							HandleSearch={HandleSearch}
 							search={search}
 							SetSearch={SetSearch}
 							animeList={animeList} /></Fragment>} />
 							
-						<Route path="/:id" element={<AnimePage/>} />
+						<Route  path="/:id" element={<Fragment><Sidebar topAnime={topAnime} /><AnimePage/></Fragment>} />
 					</Routes>
-				</BrowserRouter>
+				
 			</div>
 
 		</div>
 	);
+}
+	else{
+		return(
+			<>
+				Loading...
+			</>
+		)
+	}
 }
 
 export default App;

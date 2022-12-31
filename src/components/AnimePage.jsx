@@ -1,41 +1,78 @@
-import React, { useState, useRef } from 'react';
-
-
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { Badge } from 'reactstrap';
+import { InfinitySpin } from 'react-loader-spinner'
 function AnimePage() {
   // Initialize the state with some example data
-  const [anime, setAnime] = useState({
-    title: 'Naruto',
-    image: 'https://cdn.myanimelist.net/images/anime/13/17405.jpg',
-    synopsis: 'Naruto Uzumaki, a mischievous adolescent ninja, struggles as he searches for recognition and dreams of becoming the Hokage, the village\'s leader and strongest ninja.',
-    episodesWatched: 12,
-    status: 'currently watching'
-  });
+  let params = useParams();
+  let host = "http://localhost:5000"
 
-  // Use a ref to access the value of the dropdown menu
-  const statusInput = useRef();
-
-  // Function to update the status of the anime
-  const updateStatus = (e) => {
-    e.preventDefault();
-    setAnime({ ...anime, status: statusInput.current.value });
+  const [anime, setAnime] = useState({});
+  // const [genres, setGenres] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const fetchAnime = async () => {
+    const response = await axios.get(`${host}/api/anime/${params.id}`);
+    setAnime(response.data);
+    setLoading(false);
+    console.log(response.data)
   }
 
-  return (
-    <>
-      <div>
-        <div className="container">
-          <div className="row">
-            <div className="col-3">
-              <img src={anime.image} alt="naruto image" />
-            </div>
-            <div className="col-2">
-              <h3>{anime.title}</h3>
-            </div>
+  // const Genres = async () => {
+  //   setGenres(anime?.genres)
+  // }
+  useEffect(() => {
+    fetchAnime();
+    // Genres();
+  }, [])
+
+ 
+  if (!loading) {
+    return (
+      <>
+        <div className='row anime-page-container' >
+          <img src={anime?.images?.jpg?.image_url ?? ''} alt={anime.title} className="anime-page-main-image" />
+          <div className='col'>
+            <h3>{anime.title}</h3>
+            <p className='container'>{anime.synopsis}</p>
+              <div>{anime.genres.forEach(element => {
+                <Badge color="dark">{element['name']}</Badge>
+              })}
+                </div>
+            
+          </div>
+          <br />
+          <br />
+          <h3>
+            Details
+          </h3>
+          <div className='mx-3'>
+            
+            Duration : {anime.duration}<br />
+            Episodes : {anime.episodes}
           </div>
         </div>
+      </>
+    );
+  }
+  else {
+    return ( 
+      <>
+      <div className='spinner-center'> 
+      <InfinitySpin
+          width='200'
+          color="#4fa94d"
+        />
+
       </div>
-    </>
-  );
+        
+
+      </>
+    )
+
+  }
 }
 
 export default AnimePage;
+
+
