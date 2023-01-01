@@ -3,17 +3,24 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Fira Sans", sans-serif;
+  max-width: 100%;
+}
+
+body{
+  overflow-x: hidden;
 }
 
 header {
   padding-top: 50px;
   padding-bottom: 50px;
+  
 }
 header h1 {
   color: #AAA;
   font-size: 36px;
   font-weight: 400;
   text-align: center;
+  
 }
 header h1 strong {
   color: #313131;
@@ -146,11 +153,20 @@ header h1 strong {
   border-radius:25px;
   
 }
+
 .anime-page-container h3 {
   padding: 15px;
   margin-top: 50px;
+  margin-left:35px;
   font-family: 'Roboto,sans-serif';
   font-size: '18px';
+}
+
+.anime-page-container .details-container{
+  margin-left:35px;
+}
+.anime-page-container{
+  overflow-x: hidden;
 }
 
 @media only screen 
