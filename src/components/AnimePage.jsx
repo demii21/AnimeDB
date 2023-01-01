@@ -16,6 +16,7 @@ function AnimePage() {
     setAnime(response.data);
     setLoading(false);
     console.log(response.data)
+
   }
 
   // const Genres = async () => {
@@ -33,12 +34,12 @@ function AnimePage() {
         <div className='row anime-page-container' >
           <img src={anime?.images?.jpg?.image_url ?? ''} alt={anime.title} className="anime-page-main-image" />
           <div className='col'>
-            <h3>{anime.title}</h3>
-            <p className='container'>{anime.synopsis}</p>
-              <div>{anime.genres.forEach(element => {
-                <Badge color="dark">{element['name']}</Badge>
+            <h3 >{anime.title}</h3>
+            <p className='container'>{anime.synopsis} <br /><br />
+              Tags :{anime.genres.map(element => { return(
+               <Badge className="badge rounded-pill bg-info mx-2" key={element["name"]}>{element["name"]}</Badge>)
               })}
-                </div>
+            </p>    
             
           </div>
           <br />
@@ -47,9 +48,10 @@ function AnimePage() {
             Details
           </h3>
           <div className='mx-3'>
-            
+            Premiered : {anime.aired.from} <br />
+            Status : {anime.status == "Finished Airing"?"Ended" : "Running"} <br />
             Duration : {anime.duration}<br />
-            Episodes : {anime.episodes}
+            Episodes : {anime.episodes} Episodes in total  
           </div>
         </div>
       </>

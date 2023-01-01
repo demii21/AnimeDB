@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 import AnimePage from './components/AnimePage';
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 
 
@@ -49,7 +49,7 @@ if(!loading){
 			<Header />
 			<div className="content-wrap">
 				
-					<Routes>
+					<Routes >
 						<Route exact path="/" element={<Fragment><Sidebar topAnime={topAnime} /><MainContent
 							HandleSearch={HandleSearch}
 							search={search}

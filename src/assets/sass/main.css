@@ -147,8 +147,10 @@ header h1 strong {
   
 }
 .anime-page-container h3 {
-  padding: 50px;
+  padding: 15px;
   margin-top: 50px;
+  font-family: 'Roboto,sans-serif';
+  font-size: '18px';
 }
 
 @media only screen 
