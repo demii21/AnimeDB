@@ -8,8 +8,8 @@ function AnimePage() {
   let params = useParams();
   let host = "http://localhost:5000"
 
+  const [watched,setWatched] = useState(false);
   const [anime, setAnime] = useState({});
-  
   const [loading, setLoading] = useState(true);
   const fetchAnime = async () => {
     if(anime.mal_id!=params.id){
@@ -18,13 +18,41 @@ function AnimePage() {
     setLoading(false);
     console.log(response.data)
     }
-    
-    
+  }
 
+  
+  const handleWantToWatchClick = () =>{
+    let store = JSON.parse(localStorage.getItem("WatchedAnime")||'[]');
+    store.push({
+      mal_id: anime.mal_id,
+      data:anime,
+    });
+    localStorage.setItem("WatchedAnime", JSON.stringify(store));
+    setWatched(true);
+  }
+  const removeWatched = () => {
+    let store = JSON.parse(localStorage.getItem("WatchedAnime")||'[]');
+    if(watched){
+      let index = store.findIndex(a=>a.mal_id === anime.mal_id);
+      index !== -1 && store.splice(index,1);
+      localStorage.setItem("WatchedAnime",JSON.stringify(store))
+    }
+    setWatched(false);
+  }
+
+  const checkWatched = () =>{
+    let store = JSON.parse(localStorage.getItem("WatchedAnime")||'[]');
+    store.map((x)=>{
+      if(x.mal_id === anime.mal_id){
+        setWatched(true);
+      }
+    })
+   
   }
 
   useEffect(() => {
     fetchAnime();
+    checkWatched();
   }, [fetchAnime])
 
  
@@ -53,7 +81,18 @@ function AnimePage() {
             Duration : {anime.duration}<br />
             Episodes : {anime.episodes} Episodes in total  
           </div>
+          <div>
+            {watched ? 
+            <button type="button" className="btn btn-danger" style={{marginLeft:'30px',marginTop:'15px'}} onClick={()=>{
+              removeWatched()
+            }}>Remove</button>:
+          <button type="button" className="btn btn-primary" style={{marginLeft:'30px',marginTop:'15px'}} onClick={()=>{
+            handleWantToWatchClick()
+          }}>Watched</button> 
+        }
+          </div>
         </div>
+        
       </>
     );
   }

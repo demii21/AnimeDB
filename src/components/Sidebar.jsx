@@ -11,6 +11,8 @@ const Sidebar = ({topAnime}) => {
                     {anime.title}
                 </Link>
             )}
+            <br /><br />
+            <Link to={`/watched`} >Watched</Link>
         </nav>
    </aside>
   )
