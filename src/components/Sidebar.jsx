@@ -12,8 +12,10 @@ const Sidebar = ({topAnime}) => {
                 </Link>
             )}
             <br /><br />
-            <Link to={`/watched`} >Watched</Link>
+            
         </nav>
+        <Link to={`/watched`} ><h3 className="pillBtn">Watched</h3></Link>
+        
    </aside>
   )
 }

@@ -43,6 +43,7 @@ header h1 strong {
   font-size: 24px;
   margin-bottom: 16px;
 }
+
 .content-wrap aside nav a {
   display: block;
   padding: 8px 16px;
@@ -54,6 +55,19 @@ header h1 strong {
   border-radius: 999px;
   text-decoration: none;
   transition: 0.4s;
+}
+.content-wrap aside .pillBtn {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  
 }
 .content-wrap aside nav a:hover {
   background-color: #313131;
@@ -120,7 +134,7 @@ header h1 strong {
 }
 .content-wrap main .anime-list .anime-card figure img {
   display: block;
-  width: 70%;
+  width: 60%;
   
   -o-object-fit: cover;
      object-fit: cover;
@@ -157,9 +171,12 @@ header h1 strong {
 .anime-page-container h3 {
   padding: 15px;
   margin-top: 50px;
-  margin-left:35px;
   font-family: 'Roboto,sans-serif';
   font-size: '18px';
+}
+
+.anime-page-container .details-container h3{
+  margin-left:-15px;
 }
 
 .anime-page-container .details-container{

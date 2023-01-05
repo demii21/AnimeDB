@@ -72,10 +72,10 @@ function AnimePage() {
           </div>
           <br />
           <br />
+          <div className="details-container">
           <h3 >
             Details
           </h3>
-          <div className="details-container">
             Premiered : {anime.aired.from} <br />
             Status : {anime.status === "Finished Airing"?"Ended" : "Running"} <br />
             Duration : {anime.duration}<br />
